@@ -1,0 +1,73 @@
+Installation of the sftp server
+
+
+sudo apt update
+sudo apt install -y openssh-server
+sudo add user locker
+sudo passwd locker
+sudo /etc
+cd ssh
+nano sshd open this file
+
+
+add this as per the  user
+
+sudo chown root:root /home/locker
+sudo chmod 755 /home/locker
+
+
+sudo mkdir -p /home/locker/inword
+sudo mkdir -p /home/locker/outword
+sudo chown locker:locker /home/locker/inword
+sudo chown locker:locker /home/locker/outword
+
+
+sudo nano /etc/ssh/sshd_config
+
+
+Match User locker
+    ForceCommand internal-sftp
+    PasswordAuthentication yes
+    ChrootDirectory /home/locker
+    PermitTunnel no
+    AllowAgentForwarding no
+    AllowTcpForwarding no
+    X11Forwarding no
+
+
+sudo systemctl restart ssh
+
+
+ls -ld /home/locker/inword /home/locker/outword
+
+
+sftp locker@13.201.229.28
+
+
+
+
+
+
+
+
+
+
+
+
+Match User sftpuser
+    ForceCommand internal-sftp
+    PasswordAuthentication yes
+    ChrootDirectory /home/locker
+    PermitTunnel no
+    AllowAgentForwarding no
+    AllowTcpForwarding no
+    X11Forwarding no
+
+
+
+
+
+
+
+
+sftp sftpuser@172.31.3.62
